@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="text_hello">Welcome to the application!</string>
+    <string name="text_input">Enter a number</string>
+    <string name="text_input2">Enter another number</string>
+    <string name="text_buton">Click here</string>
+    <string name="text_modified">The text has been changed!</string>
+    <string name="text_sum">The sum is: %1$d</string>
+    <string name="text_error_numbers">Please enter only numbers!</string>
+    <string name="text_error_empty">Please fill in both fields!</string>
+
+</resources>

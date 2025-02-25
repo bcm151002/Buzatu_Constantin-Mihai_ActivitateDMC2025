@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="text_buton">Buton smecher</string>
+    <string name="text_hello">Hello smecher</string>
+    <string name="text_input">Introdu un numar</string>
+    <string name="text_input2">Introdu alt numar</string>
+    <string name="text_modified">Textul a fost schimbat!</string>
+    <string name="text_sum">Suma este: %1$d</string>
+    <string name="text_error_numbers">Introduceți doar numere!</string>
+    <string name="text_error_empty">Completati ambele campuri!</string>
 </resources>

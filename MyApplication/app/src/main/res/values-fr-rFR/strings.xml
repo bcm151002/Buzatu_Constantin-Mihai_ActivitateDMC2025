@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mon Application</string>
+    <string name="text_hello">Bienvenue dans le application!</string>
+    <string name="text_input">Entrez un numéro</string>
+    <string name="text_input2">Entrez un autre numéro</string>
+    <string name="text_buton">Cliquez ici</string>
+    <string name="text_modified">Le texte a été modifié!</string>
+    <string name="text_sum">La somme est: %1$d</string>
+    <string name="text_error_numbers">Veuillez entrer uniquement des nombres!</string>
+    <string name="text_error_empty">Veuillez remplir les deux champs!</string>
+
+</resources>
