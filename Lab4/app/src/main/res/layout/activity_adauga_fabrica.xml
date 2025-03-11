@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AdaugaFabrica">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:paddingBottom="80dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Adaugă o fabrică nouă"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- Nume fabrică -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nume Fabrică:"
+            android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/etNumeFabrica"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Introduceți numele fabricii"
+            android:inputType="text"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Număr angajați -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Număr Angajați:"
+            android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/etNumarAngajati"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Introduceți numărul de angajați"
+            android:inputType="number"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Profit anual -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Profit Anual (RON):"
+            android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/etProfitAnual"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Introduceți profitul anual"
+            android:inputType="numberDecimal"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Este operațională (CheckBox) -->
+        <CheckBox
+            android:id="@+id/cbEsteOperationala"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fabrica este operațională"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Stare fabrică (Switch) -->
+        <Switch
+            android:id="@+id/switchStare"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Stare fabrică (Inactivă/Activă)"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Implementare (ToggleButton) -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Stadiu implementare:"
+            android:textSize="16sp"/>
+
+        <ToggleButton
+            android:id="@+id/toggleImplementare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textOn="Complet implementată"
+            android:textOff="În implementare"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Selectați tipul fabricii:"
+            android:textSize="16sp"/>
+
+        <RadioGroup
+            android:id="@+id/rgTipFabrica"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="16dp">
+
+            <RadioButton
+                android:id="@+id/rbAlimente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Alimente"/>
+
+            <RadioButton
+                android:id="@+id/rbAutomobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Automobile"/>
+
+            <RadioButton
+                android:id="@+id/rbElectronice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Electronice"/>
+
+            <RadioButton
+                android:id="@+id/rbTextile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Textile"/>
+
+            <RadioButton
+                android:id="@+id/rbMobila"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mobila"/>
+        </RadioGroup>
+
+        <!-- Tip fabrică (Spinner) -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sau selectați din listă:"
+            android:textSize="16sp"/>
+
+        <Spinner
+            android:id="@+id/spinnerTipFabrica"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Rating pentru performanță -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Evaluați performanța:"
+            android:textSize="16sp"/>
+
+        <RatingBar
+            android:id="@+id/ratingPerformanta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:stepSize="0.5"
+            android:layout_gravity="center"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- Butoane -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+
+            <Button
+                android:id="@+id/btnAnuleaza"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Anulează"
+                android:layout_marginEnd="8dp"/>
+
+            <Button
+                android:id="@+id/btnSalveaza"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Salvează"
+                android:layout_marginStart="8dp"/>
+        </LinearLayout>
+
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+    </LinearLayout>
+</ScrollView>
