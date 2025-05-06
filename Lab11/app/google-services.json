@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "551586792028",
+    "firebase_url": "https://lab11-android-30f41-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "lab11-android-30f41",
+    "storage_bucket": "lab11-android-30f41.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:551586792028:android:9ba68f85ef88ef05611c99",
+        "android_client_info": {
+          "package_name": "com.example.lab11"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQbTBzIvxiQ3UE4FhQno4vz4dKV7QANCU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

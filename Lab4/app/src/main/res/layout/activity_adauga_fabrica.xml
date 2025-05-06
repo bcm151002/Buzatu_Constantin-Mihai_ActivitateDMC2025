@@ -8,6 +8,7 @@
     tools:context=".AdaugaFabrica">
 
     <LinearLayout
+        android:id="@+id/layout_adauga_fabrica"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -84,21 +85,8 @@
             android:text="Stare fabrică (Inactivă/Activă)"
             android:layout_marginBottom="16dp"/>
 
-        <!-- Implementare (ToggleButton) -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Stadiu implementare:"
-            android:textSize="16sp"/>
 
-        <ToggleButton
-            android:id="@+id/toggleImplementare"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textOn="Complet implementată"
-            android:textOff="În implementare"
-            android:layout_marginBottom="16dp"/>
-
+        <!-- Tip fabrică (RadioGroup) -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -172,6 +160,20 @@
             android:layout_gravity="center"
             android:layout_marginBottom="24dp"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Data înființare:"
+            android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/etDataInfiintare"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Selectați data"
+            android:focusable="false"
+            android:layout_marginBottom="16dp"/>
+
         <!-- Butoane -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -195,7 +197,6 @@
                 android:text="Salvează"
                 android:layout_marginStart="8dp"/>
         </LinearLayout>
-
 
         <Space
             android:layout_width="match_parent"

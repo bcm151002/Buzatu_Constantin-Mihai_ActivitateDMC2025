@@ -26,15 +26,20 @@
         android:text="Adaugă Fabrică"
         android:layout_marginBottom="32dp"/>
 
-    <TextView
-        android:id="@+id/tvDetalii"
+    <ListView
+        android:id="@+id/lvFabrici"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:background="#f0f0f0"
         android:padding="16dp"
-        android:textSize="16sp"
-        android:visibility="gone"
-        tools:text="Detalii fabrică..."
-        tools:visibility="visible"/>
+        android:visibility="visible"/>
+
+    <Button
+        android:id="@+id/btnSetari"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Setări"
+        android:layout_marginTop="8dp"/>
 
 </LinearLayout>

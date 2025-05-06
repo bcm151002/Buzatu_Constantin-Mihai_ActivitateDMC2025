@@ -5,6 +5,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.io.Serializable;
+import java.util.Date;
 
 enum TipFabrica {
     ALIMENTE,
@@ -22,14 +23,20 @@ public class Fabrica implements Parcelable {
     private double profitAnual;
     private TipFabrica tipFabrica;
 
+    private Date dataInfiintare;
+
+    private float rating;
+
     // Constructor
     public Fabrica(String nume, int numarAngajati, boolean esteOperationala,
-                   double profitAnual, TipFabrica tipFabrica) {
+                   double profitAnual, TipFabrica tipFabrica, Date dataInfiintare, float rating) {
         this.nume = nume;
         this.numarAngajati = numarAngajati;
         this.esteOperationala = esteOperationala;
         this.profitAnual = profitAnual;
         this.tipFabrica = tipFabrica;
+        this.dataInfiintare = dataInfiintare;
+        this.rating = rating;
     }
 
     protected Fabrica(Parcel in) {
@@ -38,6 +45,8 @@ public class Fabrica implements Parcelable {
         esteOperationala = in.readByte() != 0; // 0 = false, 1 = true
         profitAnual = in.readDouble();
         tipFabrica = TipFabrica.valueOf(in.readString());
+        dataInfiintare = new Date(in.readLong());
+        rating = in.readFloat();
     }
 
     @Override
@@ -47,6 +56,8 @@ public class Fabrica implements Parcelable {
         dest.writeByte((byte) (esteOperationala ? 1 : 0));
         dest.writeDouble(profitAnual);
         dest.writeString(tipFabrica.name());
+        dest.writeLong(dataInfiintare.getTime());
+        dest.writeFloat(rating);
     }
 
     @Override
@@ -65,6 +76,16 @@ public class Fabrica implements Parcelable {
             return new Fabrica[size];
         }
     };
+
+    @Override
+    public String toString() {
+        return "Fabrica: " + nume +
+                ", Angajați: " + numarAngajati +
+                ", Operatională: " + (esteOperationala ? "Da" : "Nu") +
+                ", Profit: " + profitAnual +
+                ", Tip: " + tipFabrica +
+                ", Infiintată la: " + dataInfiintare;
+    }
 
     public String getNume() {
         return nume;
@@ -104,6 +125,22 @@ public class Fabrica implements Parcelable {
 
     public void setTipFabrica(TipFabrica tipFabrica) {
         this.tipFabrica = tipFabrica;
+    }
+
+    public Date getDataInfiintare() {
+        return dataInfiintare;
+    }
+
+    public void setDataInfiintare(Date dataInfiintare) {
+        this.dataInfiintare = dataInfiintare;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
     }
 }
 

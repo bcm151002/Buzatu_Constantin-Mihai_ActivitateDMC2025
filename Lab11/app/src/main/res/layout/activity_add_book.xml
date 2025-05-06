@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/editTextTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Titlu"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/editTextAuthor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Autor"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/editTextPages"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Număr pagini"
+        android:inputType="number"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/editTextYear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="An publicație"
+        android:inputType="number"
+        android:layout_marginBottom="16dp" />
+
+    <CheckBox
+        android:id="@+id/checkBoxOnline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Disponibil online"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Salvează" />
+
+</LinearLayout>

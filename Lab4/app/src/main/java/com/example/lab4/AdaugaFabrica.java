@@ -1,5 +1,6 @@
 package com.example.lab4;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RatingBar;
@@ -15,12 +17,14 @@ import android.widget.Switch;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
+// Continuăm să extindem AppCompatActivity în loc de BaseActivity
 public class AdaugaFabrica extends AppCompatActivity {
 
     private EditText etNumeFabrica;
@@ -30,10 +34,18 @@ public class AdaugaFabrica extends AppCompatActivity {
     private Switch switchStare;
     private ToggleButton toggleImplementare;
     private RadioGroup rgTipFabrica;
+    private RadioButton rbAlimente, rbAutomobile, rbElectronice, rbTextile, rbMobila;
     private Spinner spinnerTipFabrica;
     private RatingBar ratingPerformanta;
     private Button btnSalveaza;
     private Button btnAnuleaza;
+    private EditText etDataInfiintare;
+    private Calendar calendarDataInfiintare;
+
+    // Variabile pentru modul de editare
+    private boolean esteEditare = false;
+    private int pozitieSelectata = -1;
+    private Fabrica fabricaEditata = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +53,31 @@ public class AdaugaFabrica extends AppCompatActivity {
         setContentView(R.layout.activity_adauga_fabrica);
 
         initializeazaComponente();
-
         configureazaSpinner();
-
         configureazaButoane();
+
+        // Verifică dacă este mod de editare
+        Intent intent = getIntent();
+        if (intent.hasExtra("fabrica")) {
+            esteEditare = true;
+            pozitieSelectata = intent.getIntExtra("pozitie", -1);
+            fabricaEditata = intent.getParcelableExtra("fabrica");
+
+            if (fabricaEditata != null) {
+                // Completează formul cu datele fabricii
+                populezaFormCuDatele(fabricaEditata);
+
+                // Actualizează titlul activității
+                setTitle("Editează Fabrica");
+            }
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Aplicăm setările de text când activitatea devine vizibilă
+        aplicaSetariText();
     }
 
     private void initializeazaComponente() {
@@ -53,12 +86,84 @@ public class AdaugaFabrica extends AppCompatActivity {
         etProfitAnual = findViewById(R.id.etProfitAnual);
         cbEsteOperationala = findViewById(R.id.cbEsteOperationala);
         switchStare = findViewById(R.id.switchStare);
-        toggleImplementare = findViewById(R.id.toggleImplementare);
         rgTipFabrica = findViewById(R.id.rgTipFabrica);
+        rbAlimente = findViewById(R.id.rbAlimente);
+        rbAutomobile = findViewById(R.id.rbAutomobile);
+        rbElectronice = findViewById(R.id.rbElectronice);
+        rbTextile = findViewById(R.id.rbTextile);
+        rbMobila = findViewById(R.id.rbMobila);
         spinnerTipFabrica = findViewById(R.id.spinnerTipFabrica);
         ratingPerformanta = findViewById(R.id.ratingPerformanta);
         btnSalveaza = findViewById(R.id.btnSalveaza);
         btnAnuleaza = findViewById(R.id.btnAnuleaza);
+        etDataInfiintare = findViewById(R.id.etDataInfiintare);
+        calendarDataInfiintare = Calendar.getInstance();
+
+        configureazaDatePicker();
+    }
+
+    // Metoda pentru completarea formularului cu datele fabricii pentru editare
+    private void populezaFormCuDatele(Fabrica fabrica) {
+        etNumeFabrica.setText(fabrica.getNume());
+        etNumarAngajati.setText(String.valueOf(fabrica.getNumarAngajati()));
+        etProfitAnual.setText(String.valueOf(fabrica.getProfitAnual()));
+        cbEsteOperationala.setChecked(fabrica.isEsteOperationala());
+        switchStare.setChecked(fabrica.isEsteOperationala());
+
+        // Setează data de înființare
+        if (fabrica.getDataInfiintare() != null) {
+            calendarDataInfiintare.setTime(fabrica.getDataInfiintare());
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+            etDataInfiintare.setText(sdf.format(fabrica.getDataInfiintare()));
+        }
+
+        ratingPerformanta.setRating(fabrica.getRating());
+
+        // Setează tipul fabricii în RadioGroup
+        switch (fabrica.getTipFabrica()) {
+            case ALIMENTE:
+                rbAlimente.setChecked(true);
+                break;
+            case AUTOMOBILE:
+                rbAutomobile.setChecked(true);
+                break;
+            case ELECTRONICE:
+                rbElectronice.setChecked(true);
+                break;
+            case TEXTILE:
+                rbTextile.setChecked(true);
+                break;
+            case MOBILA:
+                rbMobila.setChecked(true);
+                break;
+        }
+
+        // Setează tipul fabricii în Spinner
+        for (int i = 0; i < spinnerTipFabrica.getCount(); i++) {
+            TipFabrica tip = (TipFabrica) spinnerTipFabrica.getItemAtPosition(i);
+            if (tip == fabrica.getTipFabrica()) {
+                spinnerTipFabrica.setSelection(i);
+                break;
+            }
+        }
+    }
+
+    private void configureazaDatePicker() {
+        etDataInfiintare.setOnClickListener(v -> {
+            DatePickerDialog datePicker = new DatePickerDialog(
+                    this,
+                    (view, year, month, dayOfMonth) -> {
+                        calendarDataInfiintare.set(year, month, dayOfMonth);
+                        etDataInfiintare.setText(
+                                String.format("%02d/%02d/%d", dayOfMonth, month + 1, year)
+                        );
+                    },
+                    calendarDataInfiintare.get(Calendar.YEAR),
+                    calendarDataInfiintare.get(Calendar.MONTH),
+                    calendarDataInfiintare.get(Calendar.DAY_OF_MONTH)
+            );
+            datePicker.show();
+        });
     }
 
     private void configureazaSpinner() {
@@ -72,28 +177,36 @@ public class AdaugaFabrica extends AppCompatActivity {
     }
 
     private void configureazaButoane() {
-        btnSalveaza.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (valideazaDate()) {
+        btnSalveaza.setOnClickListener(v -> {
+            if (valideazaDate()) {
+                Fabrica fabrica = creeazaFabrica();
 
-                    Fabrica fabrica = creeazaFabrica();
+                // ADĂUGAT: Salvăm fabrica în fișier
+                FisierHelper.salveazaFabrica(this, fabrica);
 
-                    Intent resultIntent = new Intent();
-                    resultIntent.putExtra("fabrica", fabrica);
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("fabrica", fabrica);
 
-                    setResult(RESULT_OK, resultIntent);
-                    finish();
+                // Adăugăm poziția dacă suntem în modul de editare
+                if (esteEditare && pozitieSelectata != -1) {
+                    resultIntent.putExtra("pozitie", pozitieSelectata);
                 }
+
+                setResult(RESULT_OK, resultIntent);
+
+                // Afișăm un mesaj care include și confirmarea salvării în fișier
+                String mesaj = esteEditare ?
+                        "Fabrica a fost actualizată și salvată în fișier!" :
+                        "Fabrica a fost creată și salvată în fișier!";
+                Toast.makeText(this, mesaj, Toast.LENGTH_SHORT).show();
+
+                finish();
             }
         });
 
-        btnAnuleaza.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setResult(RESULT_CANCELED);
-                finish();
-            }
+        btnAnuleaza.setOnClickListener(v -> {
+            setResult(RESULT_CANCELED);
+            finish();
         });
 
         cbEsteOperationala.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -106,7 +219,7 @@ public class AdaugaFabrica extends AppCompatActivity {
     }
 
     private boolean valideazaDate() {
-        if (etNumeFabrica.getText().toString().isEmpty()) {
+        if (etNumeFabrica.getText().toString().trim().isEmpty()) {
             Toast.makeText(this, "Introduceți numele fabricii", Toast.LENGTH_SHORT).show();
             return false;
         }
@@ -129,7 +242,32 @@ public class AdaugaFabrica extends AppCompatActivity {
             return false;
         }
 
+        if (etDataInfiintare.getText().toString().isEmpty()) {
+            Toast.makeText(this, "Selectați data înființării", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        Calendar today = Calendar.getInstance();
+        if (calendarDataInfiintare.after(today)) {
+            Toast.makeText(this, "Data înființării nu poate fi în viitor", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
         return true;
+    }
+
+    private void aplicaSetariText() {
+        try {
+            // Obține referința la LinearLayout-ul principal din ScrollView
+            LinearLayout mainLayout = findViewById(R.id.layout_adauga_fabrica);
+
+            if (mainLayout != null) {
+                // Folosim TextSettingsManager pentru a aplica setările
+                TextSettingsManager.applyTextSettings(this, mainLayout);
+            }
+        } catch (Exception e) {
+            // Eroarea poate fi logată, dar nu ar trebui să afecteze funcționalitatea aplicației
+        }
     }
 
     private Fabrica creeazaFabrica() {
@@ -137,9 +275,10 @@ public class AdaugaFabrica extends AppCompatActivity {
         int numarAngajati = Integer.parseInt(etNumarAngajati.getText().toString());
         boolean esteOperationala = cbEsteOperationala.isChecked();
         double profitAnual = Double.parseDouble(etProfitAnual.getText().toString());
+        Date dataInfiintare = calendarDataInfiintare.getTime();
+        float rating = ratingPerformanta.getRating();
 
         TipFabrica tipFabrica;
-
         int radioButtonId = rgTipFabrica.getCheckedRadioButtonId();
         if (radioButtonId != -1) {
             if (radioButtonId == R.id.rbAlimente) {
@@ -157,6 +296,6 @@ public class AdaugaFabrica extends AppCompatActivity {
             tipFabrica = (TipFabrica) spinnerTipFabrica.getSelectedItem();
         }
 
-        return new Fabrica(nume, numarAngajati, esteOperationala, profitAnual, tipFabrica);
+        return new Fabrica(nume, numarAngajati, esteOperationala, profitAnual, tipFabrica, dataInfiintare, rating);
     }
 }
