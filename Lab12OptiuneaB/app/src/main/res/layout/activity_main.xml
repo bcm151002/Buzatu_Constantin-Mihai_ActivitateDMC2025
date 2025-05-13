@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Introduceți valorile (separate prin virgulă)"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/etValues"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ex: 10, 20, 15, 30"
+        android:inputType="text"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Selectați tipul de grafic:"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp"/>
+
+    <RadioGroup
+        android:id="@+id/rgGraphType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp">
+
+        <RadioButton
+            android:id="@+id/rbPieChart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PieChart"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/rbColumnChart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ColumnChart"/>
+
+        <RadioButton
+            android:id="@+id/rbBarChart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="BarChart"/>
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnGenerateGraph"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Generează Grafic"/>
+
+</LinearLayout>
